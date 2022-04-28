@@ -4,13 +4,21 @@ FILE=/SO/scripts/Alerta/alertas.txt
 if [ -f "$FILE" ]; then
 	while IFS= read -r line
 	do
+		nom_User="";
 		if [ "$line" != "" ]; then
-			user=$(echo "$line" | cut -c1-1)
-			if [ "$user" == '1' ]; then
-				echo "Es root"
+			usr=$(echo "$line" | cut -c1-1)
+			
+			if [ "$usr" == '1' ]; then
+				nom_User=$(echo "root");
 			else
-				echo "No es root"
+				if [ "$usr" == '2' ]; then
+					nom_User=$(echo "d.lopez")
+				else
+					nom_User=$(echo "dfranco")
+				fi
 			fi
+
+			echo "$nom_User -> $line"
 		else
 			echo "No hay más alertas"
 		fi
